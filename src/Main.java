@@ -281,8 +281,6 @@ public class Main {
 
         printGameTable(printedField);
 
-        //System.out.println("The game start soon you must push one Integer for first row than space and second Integer for column and space than ");
-
         while (!isOnlyMinesLeft() && !isAllMinesMarked()) {
 
             System.out.println("Set/unset mines marks or claim a cell as free:"); // modes are 'free' and 'mine'
