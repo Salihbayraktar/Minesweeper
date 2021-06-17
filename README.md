@@ -1,6 +1,6 @@
 <h1>Turkish</h1>
 
-Uygulamayı ilk başta bizden oyun alanının satır sayısını istiyor. Bu değeri integer olarak giriyoruz.
+Uygulama ilk başta bizden oyun alanının satır sayısını istiyor. Bu değeri integer olarak giriyoruz.
 
 Daha sonra ise sütun sayısını istiyor bu sayıyı da integer olarak giriyoruz.
 
