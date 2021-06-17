@@ -91,12 +91,16 @@ public class Main {
     }
 
 
-    public static boolean controlCoordinates(int row, int column) {
+    public static boolean controlMineCoordinates(int row, int column) {
         if (!controlInputRowAndColumn(row, column)) {
             return false;
         }
         if (Character.isDigit(printedField[row][column])) {
             System.out.println("There is a number here!");
+            return false;
+        }
+        if(printedField[row][column] == '/'){
+            System.out.println("There is a slash here!");
             return false;
         }
         return true;
@@ -125,6 +129,10 @@ public class Main {
         if (!controlInputRowAndColumn(row, column)) {
             return false;
         }
+        if (printedField[row][column] == '*') {
+            System.out.println("Marked as mines in this location");
+            return false;
+        }
 
         if (gameField[row][column] == 'X') {
 
@@ -139,16 +147,19 @@ public class Main {
 
     public static boolean isAllMinesMarked() {
 
+        int countStars = 0;
         for (int r = 1; r < gameField.length - 1; r++) {
 
             for (int c = 1; c < gameField[r].length - 1; c++) {
 
                 if (gameField[r][c] == 'X' && printedField[r][c] != '*') {
                     return false;
+                } else if (printedField[r][c] == '*') {
+                    countStars++;
                 }
             }
         }
-        return true;
+        return totalMines == countStars;
     }
 
     public static boolean isOnlyMinesLeft() {
@@ -246,9 +257,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please enter the game field row");
+        System.out.println("Enter the number of rows of the playground");
         int userRow = scanner.nextInt();
-        System.out.println("Please enter the game field column");
+        System.out.println("Enter the number of columns of the playground");
         int userColumn = scanner.nextInt();
         tableRowSize = userRow + 2;
         tableColumnSize = userColumn + 2;
@@ -262,14 +273,15 @@ public class Main {
             System.out.println("How many mines do you want on the field?");
             totalMines = scanner.nextInt();
             scanner.nextLine();
-        }while (!controlTotalMines(totalMines));
-
+        } while (!controlTotalMines(totalMines));
 
         addMineToGameField(totalMines);
 
         fillHints();
 
         printGameTable(printedField);
+
+        //System.out.println("The game start soon you must push one Integer for first row than space and second Integer for column and space than ");
 
         while (!isOnlyMinesLeft() && !isAllMinesMarked()) {
 
@@ -287,7 +299,7 @@ public class Main {
                     }
                     break;
                 case "mine":
-                    if (controlCoordinates(row, column)) {
+                    if (controlMineCoordinates(row, column)) {
                         if (printedField[row][column] == '.') {
                             printedField[row][column] = '*';
                         } else if (printedField[row][column] == '*') {
