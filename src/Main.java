@@ -99,7 +99,7 @@ public class Main {
             System.out.println("There is a number here!");
             return false;
         }
-        if(printedField[row][column] == '/'){
+        if (printedField[row][column] == '/') {
             System.out.println("There is a slash here!");
             return false;
         }
@@ -267,7 +267,6 @@ public class Main {
         printedField = new char[tableRowSize][tableColumnSize];
 
         fillGameAndPrintedField();
-
 
         do {
             System.out.println("How many mines do you want on the field?");
