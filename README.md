@@ -26,9 +26,9 @@ mine modundayken ise seçtiğimiz bölgeyi yıldızlayarak o bölgede mayın old
 
 Programın örnek çıktısı.
 <pre>
-Please enter the game field row
+Enter the number of rows of the playground
 16
-Please enter the game field column
+Enter the number of columns of the playground
 16
 How many mines do you want on the field?
 25
