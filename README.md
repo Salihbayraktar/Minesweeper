@@ -25,7 +25,7 @@ mine modundayken ise seçtiğimiz bölgeyi yıldızlayarak o bölgede mayın old
 5 7 mine : 5. satır 7. sütundaki değerin işaretini '*' yapar ve mayın tahmini olarak kaydeder.
 
 Programın örnek çıktısı.
-<p>
+<dt>
 Please enter the game field row
 16
 Please enter the game field column
@@ -159,5 +159,5 @@ Set/unset mines marks or claim a cell as free:
 You stepped on a mine and failed!
 
 Process finished with exit code 0
-</p>
+</dt>
 
