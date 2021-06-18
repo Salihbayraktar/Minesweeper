@@ -16,13 +16,11 @@ mine modundayken ise seçtiğimiz bölgeyi yıldızlayarak o bölgede mayın old
 
 Örnek Girdiler.
 
-1 2 free : 1. satır 2. sütundaki değeri gösterir.
+3 7 free : 3. satır 7. sütundaki değeri gösterir.
 
-2 5 free : 2. satır 5. sütundaki değeri gösterir.
+8 15 free : 8. satır 15. sütundaki değeri gösterir.
 
-3 6 mine : 3. satır 6. sütundaki değerin işaretini '*' yapar ve mayın tahmini olarak kaydeder.
-
-5 7 mine : 5. satır 7. sütundaki değerin işaretini '*' yapar ve mayın tahmini olarak kaydeder.
+15 6 mine : 15. satır 6. sütundaki değerin işaretini '*' yapar ve mayın tahmini olarak kaydeder.
 
 Programın örnek çıktısı.
 <pre>
