@@ -9,7 +9,13 @@ public class Main {
     static int tableColumnSize;
     static int totalMines;
 
-    public static void fillGameAndPrintedField() {
+    public static void fillGameAndPrintedField(int userRow, int userColumn) {
+
+        tableRowSize = userRow + 2;
+        tableColumnSize = userColumn + 2;
+        gameField = new char[tableRowSize][tableColumnSize];
+        printedField = new char[tableRowSize][tableColumnSize];
+
         for (char[] chars : gameField) {
             Arrays.fill(chars, '.');
         }
@@ -46,6 +52,7 @@ public class Main {
     }
 
     public static boolean controlTotalMines(int totalMines) {
+
         if ((tableRowSize - 2) * (tableColumnSize - 2) > totalMines) {
             return true;
         } else {
@@ -254,25 +261,75 @@ public class Main {
 
     }
 
+    public static boolean isInputInteger(String input) {
+        Scanner scanner = new Scanner(input);
+
+        try {
+            scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid Input! \n");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean isQueryValid(String query) {
+        Scanner scanner = new Scanner(query);
+
+        try {
+            scanner.nextInt();
+            scanner.nextInt();
+            scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid Query! \n");
+            return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Scanner inputScanner;
+        int userRow;
+        int userColumn;
 
-        System.out.println("Enter the number of rows of the playground");
-        int userRow = scanner.nextInt();
-        System.out.println("Enter the number of columns of the playground");
-        int userColumn = scanner.nextInt();
-        tableRowSize = userRow + 2;
-        tableColumnSize = userColumn + 2;
-        gameField = new char[tableRowSize][tableColumnSize];
-        printedField = new char[tableRowSize][tableColumnSize];
+        do {
+            System.out.println("Enter the number of rows of the playground");
+            String userInputRow = scanner.nextLine();
+            if (isInputInteger(userInputRow)) {
+                inputScanner = new Scanner(userInputRow);
+                userRow = inputScanner.nextInt();
+                break;
+            }
+        } while (true);
 
-        fillGameAndPrintedField();
+        do {
+            System.out.println("Enter the number of columns of the playground");
+            String userInputColumn = scanner.nextLine();
+            if (isInputInteger(userInputColumn)) {
+                inputScanner = new Scanner(userInputColumn);
+                userColumn = inputScanner.nextInt();
+                break;
+            }
+        } while (true);
+
+
+        fillGameAndPrintedField(userRow, userColumn);
 
         do {
             System.out.println("How many mines do you want on the field?");
-            totalMines = scanner.nextInt();
-            scanner.nextLine();
-        } while (!controlTotalMines(totalMines));
+            String userInputMines = scanner.nextLine();
+            if (isInputInteger(userInputMines)) {
+
+                inputScanner = new Scanner(userInputMines);
+                totalMines = inputScanner.nextInt();
+
+                if (controlTotalMines(totalMines)) {
+                    break;
+                }
+            }
+        } while (true);
 
         addMineToGameField(totalMines);
 
@@ -284,32 +341,34 @@ public class Main {
 
             System.out.println("Set/unset mines marks or claim a cell as free:"); // modes are 'free' and 'mine'
             String query = scanner.nextLine();
-            Scanner queryScan = new Scanner(query);
-            int row = queryScan.nextInt();
-            int column = queryScan.nextInt();
-            String mode = queryScan.nextLine().trim();
-            switch (mode) {
-                case "free":
-                    if (controlFreeCoordinates(row, column)) {
-                        explore(row, column, gameField, printedField);
-                        printGameTable(printedField);
-                    }
-                    break;
-                case "mine":
-                    if (controlMineCoordinates(row, column)) {
-                        if (printedField[row][column] == '.') {
-                            printedField[row][column] = '*';
-                        } else if (printedField[row][column] == '*') {
-                            printedField[row][column] = '.';
+            if (isQueryValid(query)) {
+                Scanner queryScan = new Scanner(query);
+                int row = queryScan.nextInt();
+                int column = queryScan.nextInt();
+                String mode = queryScan.nextLine().trim();
+                switch (mode) {
+                    case "free":
+                        if (controlFreeCoordinates(row, column)) {
+                            explore(row, column, gameField, printedField);
+                            printGameTable(printedField);
+                        }
+                        break;
+                    case "mine":
+                        if (controlMineCoordinates(row, column)) {
+                            if (printedField[row][column] == '.') {
+                                printedField[row][column] = '*';
+                            } else if (printedField[row][column] == '*') {
+                                printedField[row][column] = '.';
+                            }
+
+                            printGameTable(printedField);
                         }
 
-                        printGameTable(printedField);
-                    }
-
-                    break;
-                default:
-                    System.out.println("Invalid Mode");
-                    break;
+                        break;
+                    default:
+                        System.out.println("Invalid Mode");
+                        break;
+                }
             }
         }
         System.out.println("Congratulations! You found all the mines!");
