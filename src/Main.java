@@ -339,7 +339,7 @@ public class Main {
 
         while (!isOnlyMinesLeft() && !isAllMinesMarked()) {
 
-            System.out.println("Set/unset mines marks or claim a cell as free:"); // modes are 'free' and 'mine'
+            System.out.println("Set/unset mines marks or claim a cell as free:");
             String query = scanner.nextLine();
             if (isQueryValid(query)) {
                 Scanner queryScan = new Scanner(query);
