@@ -314,7 +314,6 @@ public class Main {
             }
         } while (true);
 
-
         fillGameAndPrintedField(userRow, userColumn);
 
         do {
